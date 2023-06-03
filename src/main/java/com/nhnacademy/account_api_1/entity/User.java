@@ -26,6 +26,7 @@ public class User {
 
     private String email;
 
-    @Enumerated(value = EnumType.STRING)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Status status;
+
 }
