@@ -1,12 +1,15 @@
 package com.nhnacademy.account_api_1.controller;
 
+import com.nhnacademy.account_api_1.entity.User;
 import com.nhnacademy.account_api_1.request.UserStatus;
+import com.nhnacademy.account_api_1.response.UserResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -16,18 +19,18 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<Users> getUsers(){
+    public List<UserResponse> getUsers(){
         return userService.getUsers();
     }
 
     @GetMapping("/{indexId}")
-    public User getUser(){
+    public UserResponse getUser(){
         return userService.getUser();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User createUser(@RequestBody User user){
+    public UserResponse createUser(@RequestBody User user){
         return userService.insertUser();
     }
 
