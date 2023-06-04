@@ -1,29 +1,34 @@
 package com.nhnacademy.account_api_1.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
 @Getter
-@AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
+@Table(name = "status")
 public class Status {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "status_id")
-    private Long statusId;
+    private Integer statusId;
 
     @Column(name = "status_name")
-    private String statusName;
+    @Enumerated(EnumType.STRING)
+    private StatusName statusName;
 
-    @OneToMany
-    @JoinColumn(name = "index_id")
+    @OneToMany(mappedBy = "status")
     private List<User> users;
+
+    public enum StatusName{
+        JOINED("가입"), DORMANT("휴면"), CANCELED("탈퇴");
+        @Getter
+        private String statusName;
+        StatusName(String statusName){
+            this.statusName = statusName;
+        }
+    }
 }

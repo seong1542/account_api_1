@@ -1,17 +1,14 @@
 package com.nhnacademy.account_api_1.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Entity(name = "Users")
+@Entity
 @Getter
 @EqualsAndHashCode
-@RequiredArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
@@ -22,11 +19,22 @@ public class User {
     @Column(name = "user_id")
     private String userId;
 
+    @Setter
     private String password;
 
+    @Setter
     private String email;
 
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id")
     private Status status;
+
+    public User(String userId, String password, String email, Status status){
+        this.userId = userId;
+        this.password = password;
+        this.email = email;
+        this.status = status;
+    }
 
 }

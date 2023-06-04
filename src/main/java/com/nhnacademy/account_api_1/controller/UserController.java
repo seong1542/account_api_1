@@ -1,44 +1,59 @@
 package com.nhnacademy.account_api_1.controller;
 
+import com.nhnacademy.account_api_1.request.UserModify;
+import com.nhnacademy.account_api_1.response.UserResponse;
+import com.nhnacademy.account_api_1.request.UserRequest;
 import com.nhnacademy.account_api_1.request.UserStatus;
+import com.nhnacademy.account_api_1.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.List;
 
-@Controller
+@RestController
 @Slf4j
 @RequestMapping("/users")
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
+    public UserController(UserService userService){
+        this.userService = userService;
+    }
 
     @GetMapping
-    public List<Users> getUsers(){
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserResponse> getUsers(){
         return userService.getUsers();
     }
 
     @GetMapping("/{indexId}")
-    public User getUser(){
-        return userService.getUser();
+    @ResponseStatus(HttpStatus.OK)
+    public UserResponse getUser(@PathVariable("indexId") Long id){
+        return userService.getUser(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User createUser(@RequestBody User user){
-        return userService.insertUser();
+    public UserResponse createUser(@RequestBody UserRequest userRequest){
+        return userService.insertUser(userRequest);
+    }
+
+    @PutMapping("/{indexId}")
+    public void modifyUser(@PathVariable("indexId") Long id, @RequestBody UserModify userModify){
+        userService.updateUser(id, userModify);
     }
 
     @PutMapping("/withdrawal/{indexId}")
-    public Map<String, String> updateUser(@RequestBody UserStatus status){
-        userService.updateUserStatus(status);
-        return Map.of("status", status.toString());
+    @ResponseStatus(HttpStatus.OK)
+    public void modifyUserStatus(@RequestBody UserStatus status, @PathVariable("indexId") Long id){
+        userService.updateUserStatus(id, status);
     }
 
     @DeleteMapping("/withdrawal/{indexId}")
-    public void deleteUser(){
-
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable("indexId") Long id){
+        userService.removeUser(id);
     }
+
 }
