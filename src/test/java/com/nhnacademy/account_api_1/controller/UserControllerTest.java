@@ -72,10 +72,7 @@ class UserControllerTest {
     @DisplayName("회원가입")
     void createUser() throws Exception {
         final UserResponse userResponse = new UserResponse("testId", "test@nhnacademy.com");
-        final UserRequest userRequest = new UserRequest();
-        userRequest.setUserId("testId");
-        userRequest.setPassword("1234");
-        userRequest.setEmail("test@nhnacademy.com");
+        final UserRequest userRequest = new UserRequest("testId","1234","test@nhnacademy.com");
 
         String jsonBody = new ObjectMapper().writeValueAsString(userResponse);
 
