@@ -52,7 +52,7 @@ public class UserService {
 
     public void updateUserStatus(Long id, UserStatus userStatus){
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No such User data"));
-        user.setStatus(statusRepository.getReferenceById(userStatus.getStatus().ordinal()));
+        user.setStatus(statusRepository.getReferenceById(userStatus.getStatus().getStatusCode()));
     }
 
     public void removeUser(Long id){

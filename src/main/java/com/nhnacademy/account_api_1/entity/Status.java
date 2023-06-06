@@ -25,11 +25,14 @@ public class Status {
     private List<User> users;
 
     public enum StatusName{
-        JOINED("가입"), DORMANT("휴면"), CANCELED("탈퇴");
+        JOINED(1,"가입"), DORMANT(2,"휴면"), CANCELED(3,"탈퇴");
         @Getter
-        private String statusName;
-        StatusName(String statusName){
-            this.statusName = statusName;
+        private final Integer statusCode;
+        @Getter
+        private final String stateName;
+        StatusName(Integer statusCode, String statusName){
+            this.statusCode= statusCode;
+            this.stateName = statusName;
         }
     }
 }
