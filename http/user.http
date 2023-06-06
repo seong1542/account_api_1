@@ -1,0 +1,21 @@
+POST /users
+Host: localhost:8080
+Content-Type: application/json
+
+{
+  "userId": "test",
+  "password" : "1234",
+  "email" : "test@nhnacademy.com"
+}
+
+###
+
+GET /users/1
+Host: localhost:8080
+Content-Type: application/json
+
+###
+
+DELETE /users/withdrawal/1
+Host: localhost:8080
+Content-Type: application/json

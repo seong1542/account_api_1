@@ -20,6 +20,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final StatusRepository statusRepository;
 
+    @Transactional(readOnly = true)
     public List<UserResponse> getUsers(){
         return userRepository.getUserResponseList();
     }
@@ -38,7 +39,8 @@ public class UserService {
         if(userRepository.existsByUserId(userRequest.getUserId())){
             throw new IllegalArgumentException("Already Exists UserId");
         }
-        User user= userRepository.save(new User(userRequest.getUserId(), userRequest.getPassword(), userRequest.getEmail(), statusRepository.getReferenceById(1)));
+
+        User user = userRepository.save(new User(userRequest.getUserId(), userRequest.getPassword(), userRequest.getEmail(), statusRepository.getReferenceById(1)));
         return new UserResponse(user.getUserId(), user.getEmail());
     }
 

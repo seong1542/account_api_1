@@ -11,6 +11,7 @@ import java.util.*;
 @NoArgsConstructor
 @Table(name = "status")
 public class Status {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "status_id")

@@ -10,7 +10,6 @@ public class UserResponse {
     private final String userId;
     private final String email;
 
-
     @QueryProjection
     public UserResponse(String userId, String email){
         this.userId = userId;
