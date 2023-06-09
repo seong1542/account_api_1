@@ -1,13 +1,13 @@
 package com.nhnacademy.account_api_1.controller;
 
 import com.nhnacademy.account_api_1.request.UserModify;
-import com.nhnacademy.account_api_1.response.UserResponse;
 import com.nhnacademy.account_api_1.request.UserRequest;
 import com.nhnacademy.account_api_1.request.UserStatus;
+import com.nhnacademy.account_api_1.response.UserLoginResponse;
+import com.nhnacademy.account_api_1.response.UserResponse;
 import com.nhnacademy.account_api_1.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -57,4 +57,9 @@ public class UserController {
         userService.removeUser(id);
     }
 
+    @GetMapping("/login/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserLoginResponse getUserInfo(@PathVariable String userId) {
+        return userService.findUserInfo(userId);
+    }
 }
