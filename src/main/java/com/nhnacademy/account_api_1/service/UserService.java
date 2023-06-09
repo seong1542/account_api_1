@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -35,9 +36,8 @@ public class UserService {
         return userRepository.getUserResponseByIndexId(id);
     }
 
-
     public UserResponse insertUser(UserRequest userRequest){
-        if(userRepository.existsByUserId(userRequest.getUserId())){
+        if(Boolean.TRUE.equals(userRepository.existsByUserId(userRequest.getUserId()))){
             throw new IllegalArgumentException("Already Exists UserId");
         }
 
