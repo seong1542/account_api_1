@@ -75,7 +75,8 @@ class UserControllerTest {
 
     @Test
     @DisplayName("입력값 검증 테스트")
-    void whenNullValue_thenReturns400() throws Exception {
+    void whenNullValue_thenReturns400()
+            throws Exception {
         final UserRequest request = new UserRequest(null, null, EMAIL);
         final UserResponse response = new UserResponse(USER_ID, EMAIL);
         final String json = new ObjectMapper().writeValueAsString(response);
