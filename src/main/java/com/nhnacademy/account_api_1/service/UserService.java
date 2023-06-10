@@ -1,6 +1,7 @@
 package com.nhnacademy.account_api_1.service;
 
 import com.nhnacademy.account_api_1.request.UserModify;
+import com.nhnacademy.account_api_1.response.UserLoginResponse;
 import com.nhnacademy.account_api_1.response.UserResponse;
 import com.nhnacademy.account_api_1.entity.User;
 import com.nhnacademy.account_api_1.repository.StatusRepository;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -34,9 +36,8 @@ public class UserService {
         return userRepository.getUserResponseByIndexId(id);
     }
 
-
     public UserResponse insertUser(UserRequest userRequest){
-        if(userRepository.existsByUserId(userRequest.getUserId())){
+        if(Boolean.TRUE.equals(userRepository.existsByUserId(userRequest.getUserId()))){
             throw new IllegalArgumentException("Already Exists UserId");
         }
 
@@ -45,14 +46,14 @@ public class UserService {
     }
 
     public void updateUser(Long id, UserModify userModify){
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No such User Data"));
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No search User Data"));
         user.setPassword(userModify.getPassword());
         user.setEmail(userModify.getEmail());
     }
 
     public void updateUserStatus(Long id, UserStatus userStatus){
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No such User data"));
-        user.setStatus(statusRepository.getReferenceById(userStatus.getStatus().getStatusCode()));
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No search User data"));
+        user.setStatus(statusRepository.getReferenceById(userStatus.getStatus().ordinal()));
     }
 
     public void removeUser(Long id){
@@ -60,5 +61,10 @@ public class UserService {
             throw new IllegalArgumentException("No such User data");
         }
         userRepository.deleteById(id);
+    }
+
+    public UserLoginResponse findUserInfo(String userId) {
+        final User user = userRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException("No search User Data"));
+        return new UserLoginResponse(user.getUserId(), user.getPassword());
     }
 }
