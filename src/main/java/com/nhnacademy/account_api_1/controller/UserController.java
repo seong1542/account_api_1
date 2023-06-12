@@ -3,7 +3,6 @@ package com.nhnacademy.account_api_1.controller;
 import com.nhnacademy.account_api_1.request.UserModify;
 import com.nhnacademy.account_api_1.request.UserRequest;
 import com.nhnacademy.account_api_1.request.UserStatus;
-import com.nhnacademy.account_api_1.response.UserLoginResponse;
 import com.nhnacademy.account_api_1.response.UserResponse;
 import com.nhnacademy.account_api_1.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -23,43 +23,29 @@ public class UserController {
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     public List<UserResponse> getUsers(){
         return userService.getUsers();
     }
 
-    @GetMapping("/{indexId}")
-    @ResponseStatus(HttpStatus.OK)
-    public UserResponse getUser(@PathVariable("indexId") Long id){
+    @GetMapping("/{userId}")
+    public UserResponse getUser(@PathVariable("userId") String id){
         return userService.getUser(id);
     }
 
-    @PostMapping
+    @PostMapping("/join")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponse createUser(@Valid @RequestBody UserRequest userRequest){
+    public Map<String, String> createUser(@Valid @RequestBody UserRequest userRequest){
         return userService.insertUser(userRequest);
     }
 
-    @PutMapping("/{indexId}")
-    public void modifyUser(@PathVariable("indexId") Long id, @RequestBody UserModify userModify){
+    @PutMapping("/{userId}/change/info")
+    public void modifyUser(@PathVariable("userId") String id,
+                           @RequestBody UserModify userModify){
         userService.updateUser(id, userModify);
     }
 
-    @PutMapping("/withdrawal/{indexId}")
-    @ResponseStatus(HttpStatus.OK)
-    public void modifyUserStatus(@RequestBody UserStatus status, @PathVariable("indexId") Long id){
+    @PatchMapping("/{userId}/change/state")
+    public void modifyUserStatus(@RequestBody UserStatus status, @PathVariable("userId") String id){
         userService.updateUserStatus(id, status);
-    }
-
-    @DeleteMapping("/withdrawal/{indexId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUser(@PathVariable("indexId") Long id){
-        userService.removeUser(id);
-    }
-
-    @GetMapping("/login/{userId}")
-    @ResponseStatus(HttpStatus.OK)
-    public UserLoginResponse getUserInfo(@PathVariable String userId) {
-        return userService.findUserInfo(userId);
     }
 }

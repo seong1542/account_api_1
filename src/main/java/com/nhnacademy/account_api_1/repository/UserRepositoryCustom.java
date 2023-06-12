@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface UserRepositoryCustom {
     List<UserResponse> getUserResponseList();
-    UserResponse getUserResponseByIndexId(Long id);
+//    UserResponse getUserResponseByIndexId(Long id);
 }

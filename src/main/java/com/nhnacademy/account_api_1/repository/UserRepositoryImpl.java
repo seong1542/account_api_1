@@ -18,17 +18,17 @@ public class UserRepositoryImpl extends QuerydslRepositorySupport implements Use
         QUser user = QUser.user;
         return from(user)
                 .where(user.status().statusId.eq(1))
-                .select(new QUserResponse(user.userId, user.email))
+                .select(new QUserResponse(user.userId, user.password,user.status().statusName, user.email))
                 .fetch();
     }
 
-    @Override
-    public UserResponse getUserResponseByIndexId(Long id) {
-        QUser user = QUser.user;
-
-        return from(user)
-                .where(user.indexId.eq(id))
-                .select(new QUserResponse(user.userId, user.email))
-                .fetchOne();
-    }
+//    @Override
+//    public UserResponse getUserResponseByIndexId(Long id) {
+//        QUser user = QUser.user;
+//
+//        return from(user)
+//                .where(user.indexId.eq(id))
+//                .select(new QUserResponse(user.userId, user.password,user.status().statusName, user.email))
+//                .fetchOne();
+//    }
 }

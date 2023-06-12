@@ -3,7 +3,7 @@ Host: localhost:8080
 Content-Type: application/json
 
 ###
-GET /users/1 HTTP/1.1
+GET /users/seong HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
 
@@ -20,7 +20,7 @@ Content-Type: application/json
 }
 
 ###
-PUT /users/withdrawal/12 HTTP/1.1
+PATCH /users/seong/change/state HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
 
@@ -29,12 +29,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE /users/withdrawal/11 HTTP/1.1
-Host: localhost:8080
-Content-Type: application/json
-
-###
-PUT /users/10 HTTP/1.1
+PUT /users/seong/change/info HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
 
