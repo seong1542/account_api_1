@@ -20,10 +20,9 @@ public class User {
     @Column(name = "user_id")
     private String userId;
 
-    @Setter
     private String password;
 
-    @Setter
+
     private String email;
 
     @Setter
@@ -36,6 +35,10 @@ public class User {
         this.password = password;
         this.email = email;
         this.status = status;
+    }
+    public void updateUser(String password, String email){
+        this.password = password;
+        this.email = email;
     }
 
 }

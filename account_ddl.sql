@@ -30,7 +30,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `nhn_academy_21`.`users` (
   `user_index` INT NOT NULL AUTO_INCREMENT,
   `user_id` VARCHAR(20) CHARACTER SET 'utf8' NOT NULL,
-  `password` VARCHAR(20) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `email` VARCHAR(40) CHARACTER SET 'utf8' NOT NULL,
   `status_id` INT NOT NULL,
   PRIMARY KEY (`user_index`),

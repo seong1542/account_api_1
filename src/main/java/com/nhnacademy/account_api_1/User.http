@@ -1,16 +1,16 @@
 GET /users HTTP/1.1
-Host: localhost:8080
+Host: localhost:8081
 Content-Type: application/json
 
 ###
 GET /users/seong HTTP/1.1
-Host: localhost:8080
+Host: localhost:8081
 Content-Type: application/json
 
 
 ###
 POST /users/join HTTP/1.1
-Host: localhost:8080
+Host: localhost:8081
 Content-Type: application/json
 
 {
@@ -21,7 +21,7 @@ Content-Type: application/json
 
 ###
 PATCH /users/seong/change/state HTTP/1.1
-Host: localhost:8080
+Host: localhost:8081
 Content-Type: application/json
 
 {
@@ -30,10 +30,15 @@ Content-Type: application/json
 
 ###
 PUT /users/seong/change/info HTTP/1.1
-Host: localhost:8080
+Host: localhost:8081
 Content-Type: application/json
 
 {
   "password": "12345",
   "email": "seong1542@naver.com"
 }
+
+###
+GET /users/email/seong1542@gmail.com HTTP/1.1
+Host: localhost:8081
+Content-Type: application/json
