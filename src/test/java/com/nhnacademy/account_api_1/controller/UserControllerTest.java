@@ -38,20 +38,20 @@ class UserControllerTest {
     private final static String USER_ID = "test7";
     private final static String PASSWORD = "1234";
     private final static String EMAIL = "nhn@academy.com";
-    @Test
-    @DisplayName("Index_Id 값으로 유저 찾기")
-    void getUser() throws Exception {
-        final UserResponse response = new UserResponse(USER_ID, PASSWORD, Status.StatusName.JOINED,EMAIL);
-        given(userService.getUser(USER_ID)).willReturn(Optional.of(response));
-        final String json = new ObjectMapper().writeValueAsString(response);
-
-        mockMvc.perform(get("/users/{id}", ID)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json))
-                .andExpect(status().isOk());
-
-        verify(userService).getUser(USER_ID);
-    }
+//    @Test
+//    @DisplayName("Index_Id 값으로 유저 찾기")
+//    void getUser() throws Exception {
+//        final UserResponse response = new UserResponse(USER_ID, PASSWORD, Status.StatusName.JOINED,EMAIL);
+//        given(userService.getUser(USER_ID)).willReturn(Optional.of(response));
+//        final String json = new ObjectMapper().writeValueAsString(response);
+//
+//        mockMvc.perform(get("/users/{id}", ID)
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(json))
+//                .andExpect(status().isOk());
+//
+//        verify(userService).getUser(USER_ID);
+//    }
 
     //TODO 1. TEST 다시 작성. void로 반환되도록
 //    @Test

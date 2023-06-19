@@ -3,7 +3,7 @@ Host: localhost:8081
 Content-Type: application/json
 
 ###
-GET /users/seong HTTP/1.1
+GET /users/seung HTTP/1.1
 Host: localhost:8081
 Content-Type: application/json
 
@@ -20,7 +20,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH /users/seong/change/state HTTP/1.1
+PATCH /users/change/state/seong HTTP/1.1
 Host: localhost:8081
 Content-Type: application/json
 
@@ -29,7 +29,7 @@ Content-Type: application/json
 }
 
 ###
-PUT /users/seong/change/info HTTP/1.1
+PUT /users/change/info/seung HTTP/1.1
 Host: localhost:8081
 Content-Type: application/json
 

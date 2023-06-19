@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface UserRepositoryCustom {
     List<UserResponse> getUserResponseList();
+    Optional<UserResponse> getUserResponseByUserId(String id);
+    Optional<UserResponse> findByEmail(String email);
 }

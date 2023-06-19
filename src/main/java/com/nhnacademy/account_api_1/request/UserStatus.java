@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserStatus {
-    private Status.StatusName status;
+    private String status;
 
 }

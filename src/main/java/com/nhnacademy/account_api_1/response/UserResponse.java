@@ -8,15 +8,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@NoArgsConstructor
 public class UserResponse {
     private String userId;
     private String password;
-    private Status.StatusName status;
+    private String status;
     private String email;
 
     @QueryProjection
-    public UserResponse(String userId, String password, Status.StatusName status, String email){
+    public UserResponse(String userId, String password, String status, String email){
         this.userId = userId;
         this.password = password;
         this.status = status;

@@ -4,7 +4,6 @@ import com.nhnacademy.account_api_1.entity.Status;
 import com.nhnacademy.account_api_1.exception.AlreadyUserException;
 import com.nhnacademy.account_api_1.exception.NotFoundDataException;
 import com.nhnacademy.account_api_1.request.UserModify;
-import com.nhnacademy.account_api_1.response.UserEmailResponse;
 import com.nhnacademy.account_api_1.response.UserResponse;
 import com.nhnacademy.account_api_1.entity.User;
 import com.nhnacademy.account_api_1.repository.StatusRepository;
@@ -12,14 +11,10 @@ import com.nhnacademy.account_api_1.repository.UserRepository;
 import com.nhnacademy.account_api_1.request.UserRequest;
 import com.nhnacademy.account_api_1.request.UserStatus;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.dynamic.DynamicType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -36,7 +31,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public Optional<UserResponse> getUser(String id){
-        return userRepository.findByUserId(id);
+        return userRepository.getUserResponseByUserId(id);
     }
 
     public void insertUser(UserRequest userRequest){
@@ -56,10 +51,11 @@ public class UserService {
         User user = userRepository.findUserByUserId(id).orElseThrow(
                 () -> new NotFoundDataException("존재하는 유저가 아닙니다.")
         );
-        user.setStatus(statusRepository.getReferenceById(userStatus.getStatus().getNumberOfStatus()));
+        Status.StatusName statusName = Status.StatusName.valueOf(userStatus.getStatus());
+        user.setStatus(statusRepository.getReferenceById(statusName.getNumberOfStatus()));
     }
 
-    public Optional<UserEmailResponse> getUserByEmail(String email){
+    public Optional<UserResponse> getUserByEmail(String email){
         return userRepository.findByEmail(email);
     }
 }
