@@ -98,7 +98,7 @@ class UserControllerTest {
     @Test
     @DisplayName("유저 상태 변경")
     void modifyUserStatus() throws Exception {
-        final UserStatus status = new UserStatus(Status.StatusName.DORMANT);
+        final UserStatus status = new UserStatus(Status.StatusName.DORMANT.toString());
         final String json = new ObjectMapper().writeValueAsString(status);
 
         mockMvc.perform(put("/users/withdrawal/{indexId}", ID)
