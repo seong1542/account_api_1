@@ -56,7 +56,7 @@ public class UserController {
         if(bindingResult.hasErrors()){
             throw new ValidationException();
         }
-        log.debug("here?");
+
         userService.updateUser(id, userModify);
     }
 
